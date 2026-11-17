@@ -19,7 +19,7 @@ truth for *where the model should look*.
 
 | Phase | What | Status |
 |---|---|---|
-| 0 | Setup, data download / verification, lesion-level split, CPU benchmark | in progress |
+| 0 | Setup, data download / verification, lesion-level split, CPU benchmark | done (see `results/data/`, `results/benchmark/`) |
 | 1 | Classifier (staged transfer learning on CPU) | not yet run |
 | 2 | Explanations + mask-based localisation metrics | not yet run |
 | 3 | Lesion-only / background-only shortcut tests | not yet run |
@@ -40,6 +40,9 @@ verified, corrected or redrawn by hand (Tschandl et al., 2020).
 
 Licence: **CC BY-NC 4.0** (non-commercial use only). The data is **not** redistributed in this
 repository. Only derived split assignments (`data/splits.csv`) are committed.
+
+`results/data/cache_samples.png` shows a few dataset images (one per class) with their lesion-mask
+outlines, reproduced from HAM10000 under CC BY-NC 4.0 (resized, outline added).
 
 The dataset contains several images of the same lesion. All splits are therefore made at the
 **lesion** level (`lesion_id`) so no lesion appears in two splits. See `docs/LEARNING.md`.
@@ -71,8 +74,11 @@ python -m venv .venv
 .venv\Scripts\python.exe scripts\benchmark_cpu.py
 ```
 
-**Manual download.** On the development machine, the Dataverse API refused scripted clients
-(HTTP 403), so the files were downloaded by hand in a browser:
+The downloader sends a descriptive client name: Dataverse rejects the anonymous default
+`python-requests` client with HTTP 403. Downloads resume after interruptions, and every file is
+checked against the MD5 checksum Dataverse publishes.
+
+**Manual download (fallback).** If the automatic download fails, download the files in a browser:
 
 1. Open https://doi.org/10.7910/DVN/DBW86T and download these four files **one at a time**.
    Selecting several and clicking "Download" produces a single `dataverse_files.zip` instead.

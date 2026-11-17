@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 import sys
 from pathlib import Path
@@ -61,7 +62,7 @@ def _cmd_split(cfg: Config, args: argparse.Namespace) -> int:
     """Create the lesion-level split and save data/splits.csv (refuses to change an existing one)."""
     import pandas as pd
 
-    from dermxai.data.split import make_lesion_split, summarise_split
+    from dermxai.data.split import make_lesion_split, split_summary, summarise_split
     from dermxai.data.verify import load_metadata
 
     df = load_metadata(resolve(cfg.paths.raw_dir))
@@ -79,8 +80,13 @@ def _cmd_split(cfg: Config, args: argparse.Namespace) -> int:
         out.parent.mkdir(parents=True, exist_ok=True)
         split.to_csv(out, index=False)
         logger.info("Wrote %s", out)
-    logger.info("Lesions per split: %s", split.groupby("split")["lesion_id"].nunique().to_dict())
+    summary = split_summary(split)
+    summary_path = resolve(cfg.paths.results_dir) / "data" / "split_summary.json"
+    summary_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    logger.info("Lesions per split: %s", summary["lesions_per_split"])
+    logger.info("Share of images per split: %s", summary["image_share_per_split"])
     logger.info("Images per class and split:\n%s", summarise_split(split).to_string())
+    logger.info("Saved %s", summary_path)
     return 0
 
 

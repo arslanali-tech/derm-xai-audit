@@ -1,0 +1,88 @@
+{
+  "ok": true,
+  "checks": {
+    "metadata has required columns": true,
+    "metadata has 10015 rows": true,
+    "image_id is unique": true,
+    "all dx codes are known": true,
+    "every lesion_id has exactly one diagnosis": true,
+    "every metadata image has a JPEG": true,
+    "every metadata image has a mask": true,
+    "images folder holds 10015 JPEGs": true,
+    "masks folder holds 10015 PNGs": true,
+    "every mask has the same size as its image": true,
+    "no empty masks": true
+  },
+  "info": {
+    "n_images": 10015,
+    "n_lesions": 7470,
+    "images_per_lesion": {
+      "1": 5514,
+      "2": 1423,
+      "3": 490,
+      "4": 34,
+      "5": 5,
+      "6": 4
+    },
+    "images_per_class": {
+      "nv": 6705,
+      "mel": 1113,
+      "bkl": 1099,
+      "bcc": 514,
+      "akiec": 327,
+      "vasc": 142,
+      "df": 115
+    },
+    "lesions_per_class": {
+      "akiec": 228,
+      "bcc": 327,
+      "bkl": 727,
+      "df": 73,
+      "mel": 614,
+      "nv": 5403,
+      "vasc": 98
+    },
+    "missing_images": [],
+    "missing_masks": [],
+    "image_sizes": {
+      "600x450": 10015
+    },
+    "size_mismatch": [],
+    "empty_masks": [],
+    "n_nonbinary_masks": 0,
+    "mask_area_fraction": {
+      "all": {
+        "mean": 0.2663,
+        "median": 0.2223
+      },
+      "akiec": {
+        "mean": 0.403,
+        "median": 0.4009
+      },
+      "bcc": {
+        "mean": 0.2601,
+        "median": 0.2268
+      },
+      "bkl": {
+        "mean": 0.3196,
+        "median": 0.291
+      },
+      "df": {
+        "mean": 0.3119,
+        "median": 0.2836
+      },
+      "mel": {
+        "mean": 0.3244,
+        "median": 0.3006
+      },
+      "nv": {
+        "mean": 0.2434,
+        "median": 0.1999
+      },
+      "vasc": {
+        "mean": 0.152,
+        "median": 0.0988
+      }
+    }
+  }
+}

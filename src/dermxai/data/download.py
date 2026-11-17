@@ -208,6 +208,14 @@ def verify_local_files(raw_dir: Path) -> None:
     logger.info("All local files match the Dataverse checksums.")
 
 
+def is_data_member(name: str) -> bool:
+    """True for real .jpg/.png files; False for folders and macOS zip junk ('._x.png', '__MACOSX/')."""
+    p = Path(name)
+    if "__MACOSX" in p.parts or p.name.startswith("._"):
+        return False  # AppleDouble metadata a Mac adds when zipping; not an image
+    return p.suffix.lower() in {".jpg", ".png"}
+
+
 def extract(raw_dir: Path, min_free_gb: float) -> dict[str, int]:
     """Unzip images into raw_dir/images and masks into raw_dir/masks; return files per folder."""
     zips = raw_dir / "zips"
@@ -218,8 +226,7 @@ def extract(raw_dir: Path, min_free_gb: float) -> dict[str, int]:
         target = raw_dir / kind
         target.mkdir(parents=True, exist_ok=True)
         with zipfile.ZipFile(zips / name) as zf:
-            members = [m for m in zf.infolist()
-                       if not m.is_dir() and Path(m.filename).suffix.lower() in {".jpg", ".png"}]
+            members = [m for m in zf.infolist() if is_data_member(m.filename) and not m.is_dir()]
             check_disk(target, min_free_gb, needed_bytes=sum(m.file_size for m in members))
             written = 0
             for m in members:

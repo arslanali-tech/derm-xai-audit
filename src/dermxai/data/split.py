@@ -50,8 +50,20 @@ def assert_no_leakage(split_df: pd.DataFrame) -> None:
 
 
 def summarise_split(split_df: pd.DataFrame) -> pd.DataFrame:
-    """Table of image counts per class and split, plus each split's share of all images."""
+    """Table of image counts (integers) per class and split, with a TOTAL row."""
     table = pd.crosstab(split_df["dx"], split_df["split"]).reindex(columns=list(SPLITS), fill_value=0)
     table.loc["TOTAL"] = table.sum()
-    table.loc["share of images"] = (table.loc["TOTAL"] / table.loc["TOTAL"].sum()).round(3)
     return table
+
+
+def split_summary(split_df: pd.DataFrame) -> dict:
+    """JSON-ready summary: lesions, images and class counts per split (used by the README)."""
+    table = summarise_split(split_df)
+    n_images = int(table.loc["TOTAL"].sum())
+    return {
+        "lesions_per_split": {s: int(split_df.loc[split_df["split"] == s, "lesion_id"].nunique()) for s in SPLITS},
+        "images_per_split": {s: int(table.loc["TOTAL", s]) for s in SPLITS},
+        "image_share_per_split": {s: round(int(table.loc["TOTAL", s]) / n_images, 4) for s in SPLITS},
+        "images_per_class_and_split": {dx: {s: int(table.loc[dx, s]) for s in SPLITS}
+                                       for dx in table.index if dx != "TOTAL"},
+    }

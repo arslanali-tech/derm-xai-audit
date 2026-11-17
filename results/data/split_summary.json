@@ -1,0 +1,54 @@
+{
+  "lesions_per_split": {
+    "train": 5228,
+    "val": 1121,
+    "test": 1121
+  },
+  "images_per_split": {
+    "train": 7054,
+    "val": 1464,
+    "test": 1497
+  },
+  "image_share_per_split": {
+    "train": 0.7043,
+    "val": 0.1462,
+    "test": 0.1495
+  },
+  "images_per_class_and_split": {
+    "akiec": {
+      "train": 233,
+      "val": 43,
+      "test": 51
+    },
+    "bcc": {
+      "train": 365,
+      "val": 72,
+      "test": 77
+    },
+    "bkl": {
+      "train": 775,
+      "val": 167,
+      "test": 157
+    },
+    "df": {
+      "train": 76,
+      "val": 17,
+      "test": 22
+    },
+    "mel": {
+      "train": 777,
+      "val": 168,
+      "test": 168
+    },
+    "nv": {
+      "train": 4730,
+      "val": 975,
+      "test": 1000
+    },
+    "vasc": {
+      "train": 98,
+      "val": 22,
+      "test": 22
+    }
+  }
+}
