@@ -1,0 +1,65 @@
+{
+  "torch": "2.14.1+cpu",
+  "threads": 3,
+  "cpu": "see log",
+  "note": "random weights + random tensors; excludes data loading",
+  "results": {
+    "224": {
+      "per_image_seconds": {
+        "features_s_per_img": 0.06448897687500903,
+        "stage_b_train_s_per_img": 0.060262757812506604,
+        "gradcam_s_per_img": 0.07151163781250033,
+        "ig32_s_per_img": 4.1206170400007975,
+        "occlusion_s_per_img": 4.590041379998729,
+        "peak_rss_gb": 0.5321502685546875
+      },
+      "projected_minutes": {
+        "stage_A_features_min": 10.764285056720258,
+        "stage_B_per_epoch_min": 8.655072925532247,
+        "train_total_min (A + 8 epochs B)": 80.00486846097824,
+        "gradcam_full_test_2_targets_min": 3.5827330544062668,
+        "ig32_subset300_2_targets_min": 41.20617040000798,
+        "occlusion_subset300_2_targets_min": 45.90041379998729,
+        "sanity_100img_7states_gradcam+ig16_min": 24.87123517448382
+      }
+    },
+    "192": {
+      "per_image_seconds": {
+        "features_s_per_img": 0.04748033625000971,
+        "stage_b_train_s_per_img": 0.04373721125002703,
+        "gradcam_s_per_img": 0.04158352468753037,
+        "ig32_s_per_img": 2.4720321700006025,
+        "occlusion_s_per_img": 2.0373175300002915,
+        "peak_rss_gb": 0.5317726135253906
+      },
+      "projected_minutes": {
+        "stage_A_features_min": 7.925259459064121,
+        "stage_B_per_epoch_min": 6.298555265170068,
+        "train_total_min (A + 8 epochs B)": 58.31370158042466,
+        "gradcam_full_test_2_targets_min": 2.0833345868452713,
+        "ig32_subset300_2_targets_min": 24.720321700006025,
+        "occlusion_subset300_2_targets_min": 20.373175300002913,
+        "sanity_100img_7states_gradcam+ig16_min": 14.90532877969137
+      }
+    },
+    "160": {
+      "per_image_seconds": {
+        "features_s_per_img": 0.03186664843747167,
+        "stage_b_train_s_per_img": 0.030899677187517228,
+        "gradcam_s_per_img": 0.030998416875036128,
+        "ig32_s_per_img": 2.2020569300002535,
+        "occlusion_s_per_img": 1.1836500300007173,
+        "peak_rss_gb": 0.482086181640625
+      },
+      "projected_minutes": {
+        "stage_A_features_min": 5.319074735021313,
+        "stage_B_per_epoch_min": 4.40784071729297,
+        "train_total_min (A + 8 epochs B)": 40.58180047336508,
+        "gradcam_full_test_2_targets_min": 1.55302068543931,
+        "ig32_subset300_2_targets_min": 22.020569300002535,
+        "occlusion_subset300_2_targets_min": 11.836500300007174,
+        "sanity_100img_7states_gradcam+ig16_min": 13.206980288543567
+      }
+    }
+  }
+}

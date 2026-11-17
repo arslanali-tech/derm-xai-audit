@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Virtual environment and local tool caches (torch weights, matplotlib)
+.venv/
+.cache/
+
+# Data: raw dataset, zips and preprocessed cache are never committed.
+# The split file and the hand-made artifact tags ARE committed (small, needed for reproducibility).
+data/*
+!data/splits.csv
+!data/artifact_tags.csv
+!data/README.md
+
+# Results: keep JSON summaries and figures, ignore heavy files
+results/**/checkpoints/
+results/**/*.pt
+results/**/*.npz
+results/**/*.npy
+results/**/log.txt
+
+# Editors / OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

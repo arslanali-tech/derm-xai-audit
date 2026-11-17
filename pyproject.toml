@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dermxai"
+version = "0.1.0"
+description = "Is the model looking at the lesion? Mask-based audit of explanations for a HAM10000 skin-lesion classifier."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Arslan" }]
+# Exact, tested versions live in requirements.txt (installed separately because
+# torch/torchvision come from the CPU-only PyTorch index).
+dependencies = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+# --basetemp keeps pytest's temporary files inside the project (default is the user temp folder).
+addopts = "-q --basetemp=.cache/pytest-tmp"

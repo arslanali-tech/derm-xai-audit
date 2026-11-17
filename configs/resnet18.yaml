@@ -1,0 +1,25 @@
+# Main experiment config. Every key maps to a dataclass field in src/dermxai/config.py;
+# unknown keys are rejected. Training / explanation sections are added in later phases.
+run_name: resnet18
+
+paths:
+  raw_dir: data/raw/HAM10000
+  cache_dir: data/cache
+  splits_csv: data/splits.csv
+  results_dir: results
+
+data:
+  cache_short_side: 256   # 600x450 originals -> 341x256 cache
+  image_size: 224         # 192 or 160 are cheaper options (see results/benchmark)
+  val_frac: 0.15          # of lesions
+  test_frac: 0.15         # of lesions
+  split_seed: 42
+
+runtime:
+  device: cpu
+  num_threads: null       # null = physical cores - 1
+  num_workers: 0
+  low_priority: true
+  max_ram_fraction: 0.5
+  min_free_disk_gb: 20
+  seed: 42
